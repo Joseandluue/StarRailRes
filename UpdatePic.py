@@ -8,6 +8,9 @@ with open("./characters2code.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 current_path = os.getcwd()
 print("当前路径：", current_path)
+file_path = "guide/OriginMirror/character_overview/1001.png"
+directory = os.path.dirname(file_path)
+print("文件的路径目录：", directory)
 
 url = "https://bbs-api.miyoushe.com/post/wapi/getPostFull?gids=6&post_id=51078000&read=1"
 headers = {
