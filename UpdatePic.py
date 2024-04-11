@@ -21,7 +21,6 @@ soup = BeautifulSoup(str(html_content), 'html.parser')
 headers = soup.find_all('h2', class_='ql-align-center')
 images = soup.find_all('img')
 
-save_dir = './guide/Nwflower/character_overview/'  
 for header, image in zip(headers, images):
     key = header.text.strip()
     value = image['src']
