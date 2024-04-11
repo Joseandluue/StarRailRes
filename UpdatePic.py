@@ -30,8 +30,16 @@ for header, image in zip(headers, images):
         try:
             response = requests.get(value, timeout=10)
             if response.status_code == 200:
-                key_value = data['codename'].get(key, key)
-                filename = key_value + ".png"
+                for codename_key, codename_value in data['codename'].items():
+                    if isinstance(codename_value, list) and key in codename_value:
+                        filename = codename_key + ".png"
+                        break
+                    elif codename_value == key:
+                        filename = codename_key + ".png"
+                        break
+                else:
+                    filename = key + ".png"  # 如果未匹配到，则使用原始键作为文件名
+
                 save_path = os.path.join("./guide/Nwflower/character_overview", filename)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
@@ -46,3 +54,4 @@ for header, image in zip(headers, images):
             print("下载发生异常:", e)
             sys.stdout.flush()
             break
+
