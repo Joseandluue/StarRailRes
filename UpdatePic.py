@@ -20,7 +20,7 @@ soup = BeautifulSoup(str(html_content), 'html.parser')
 
 headers = soup.find_all('h2', class_='ql-align-center')
 images = soup.find_all('img')
-
+script_dir = os.getenv("GITHUB_WORKSPACE")
 for header, image in zip(headers, images):
     key = header.text.strip()
     value = image['src']
@@ -31,13 +31,17 @@ for header, image in zip(headers, images):
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
                 filename = key_value + ".png"
-                with open(filename, "wb") as file:
+                save_path = os.path.join(script_dir, filename)
+                with open(save_path, "wb") as file:
                     file.write(response.content)
-                    print(f"已下载并保存图片：{filename}")
+                    print(f"已下载并保存图片：{save_path}")
+                    sys.stdout.flush()
                 break
         except requests.exceptions.Timeout:
             print(f"下载超时，正在进行第{retry_count + 1}次重试...")
+            sys.stdout.flush()
             retry_count += 1
         except requests.exceptions.RequestException as e:
             print("下载发生异常:", e)
+            sys.stdout.flush()
             break
