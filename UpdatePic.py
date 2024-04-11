@@ -32,7 +32,7 @@ for header, image in zip(headers, images):
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
                 filename = key_value + ".png"
-                script_dir = os.path.dirname(os.path.abspath(__file__))
+                script_dir = os.getenv("GITHUB_WORKSPACE")
                 save_path = os.path.join(script_dir, filename)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
