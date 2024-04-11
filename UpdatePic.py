@@ -8,9 +8,11 @@ with open("./characters2code.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 current_path = os.getcwd()
 print("当前路径：", current_path)
+sys.stdout.flush()
 relative_path = "./characters2code.json"
 absolute_path = os.path.abspath(relative_path)
 print("绝对路径：", absolute_path)
+sys.stdout.flush()
 
 url = "https://bbs-api.miyoushe.com/post/wapi/getPostFull?gids=6&post_id=51078000&read=1"
 headers = {
@@ -37,7 +39,7 @@ for header, image in zip(headers, images):
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
                 filename = key_value + ".png"
-                save_path = os.path.join(".guide/Nwflower/character_overview", filename)
+                save_path = os.path.join("./guide/Nwflower/character_overview", filename)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
                     print(f"已下载并保存图片：{save_path}")
