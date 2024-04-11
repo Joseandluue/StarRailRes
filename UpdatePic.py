@@ -21,7 +21,7 @@ soup = BeautifulSoup(str(html_content), 'html.parser')
 headers = soup.find_all('h2', class_='ql-align-center')
 images = soup.find_all('img')
 
-
+save_dir = '/tmp'  
 for header, image in zip(headers, images):
     key = header.text.strip()
     value = image['src']
@@ -32,8 +32,7 @@ for header, image in zip(headers, images):
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
                 filename = key_value + ".png"
-                script_dir = os.getenv("GITHUB_WORKSPACE")
-                save_path = os.path.join(script_dir, filename)
+                save_path = os.path.join(save_dir, filename)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
                     print(f"已下载并保存图片：{filename}")
