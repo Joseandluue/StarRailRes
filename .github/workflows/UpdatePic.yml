@@ -1,0 +1,28 @@
+name: UpdatePic
+
+on:
+#  schedule:
+#    - cron: '0 0 * * *'  # 每天UTC 00:00执行任务
+  workflow_dispatch:  # 添加手动触发器
+
+jobs:
+  download_images:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.5
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+      
+      - name: Run the script
+        run: python UpdatePic.py
+      
+      - name: Move images to the target folder
+        run: mv *.png guide/Nwflower/character_overview/
