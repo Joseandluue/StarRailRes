@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import sys
 from bs4 import BeautifulSoup
 
 with open("./characters2code.json", "r", encoding="utf-8") as file:
