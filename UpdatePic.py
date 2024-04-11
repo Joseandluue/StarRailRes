@@ -31,7 +31,7 @@ for header, image in zip(headers, images):
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
                 filename = key_value + ".png"
-                with open(f"./guide/Nwflower/character_overview/{filename}", "wb") as file:
+                with open(filename, "wb") as file:
                     file.write(response.content)
                     print(f"已下载并保存图片：{filename}")
                 break
