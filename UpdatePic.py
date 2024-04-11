@@ -31,7 +31,7 @@ for header, image in zip(headers, images):
             response = requests.get(value, timeout=10)
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
-                filename = key_value + ".jpg"
+                filename = key_value + ".png"
                 script_dir = os.path.dirname(os.path.abspath(__file__))
                 save_path = os.path.join(script_dir, filename)
                 with open(save_path, "wb") as file:
