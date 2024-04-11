@@ -42,7 +42,7 @@ for header, image in zip(headers, images):
                 save_path = os.path.join("./guide/Nwflower/character_overview", filename)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
-                    print(f"已下载并保存图片：{save_path}")
+                    print(f"已下载并保存图片：{os.path.abspath(save_path)}")
                     sys.stdout.flush()
                 break
         except requests.exceptions.Timeout:
