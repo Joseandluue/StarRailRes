@@ -24,5 +24,6 @@ jobs:
       - name: Run the script
         run: python UpdatePic.py
       
-      - name: Move images to the target folder
-        run: mv ${{ github.workspace }}/${{ steps.step_name.outputs.file_name }} ${{ github.workspace }}/guide/Nwflower/character_overview/${{ steps.step_name.outputs.file_name }}
+      - name: Move files
+        run: |
+          mv /tmp/*.png ${{ github.workspace }}/guide/Nwflower/character_overview/
