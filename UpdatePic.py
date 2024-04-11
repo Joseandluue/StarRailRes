@@ -6,13 +6,6 @@ from bs4 import BeautifulSoup
 
 with open("./characters2code.json", "r", encoding="utf-8") as file:
     data = json.load(file)
-current_path = os.getcwd()
-print("当前路径：", current_path)
-sys.stdout.flush()
-relative_path = "./characters2code.json"
-absolute_path = os.path.abspath(relative_path)
-print("绝对路径：", absolute_path)
-sys.stdout.flush()
 
 url = "https://bbs-api.miyoushe.com/post/wapi/getPostFull?gids=6&post_id=51078000&read=1"
 headers = {
