@@ -8,9 +8,6 @@ with open("./characters2code.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 current_path = os.getcwd()
 print("当前路径：", current_path)
-file_path = "guide/OriginMirror/character_overview/1001.png"
-directory = os.path.dirname(file_path)
-print("文件的路径目录：", directory)
 
 url = "https://bbs-api.miyoushe.com/post/wapi/getPostFull?gids=6&post_id=51078000&read=1"
 headers = {
@@ -27,7 +24,8 @@ soup = BeautifulSoup(str(html_content), 'html.parser')
 headers = soup.find_all('h2', class_='ql-align-center')
 images = soup.find_all('img')
 
-save_dir = '/tmp'
+save_dir = 'guide/Nwflower/character_overview'
+sa_path = os.path.join(current_path, save_dir)
 for header, image in zip(headers, images):
     key = header.text.strip()
     value = image['src']
@@ -38,7 +36,7 @@ for header, image in zip(headers, images):
             if response.status_code == 200:
                 key_value = data['codename'].get(key, key)
                 filename = key_value + ".png"
-                save_path = os.path.join(save_dir, filename)
+                save_path = os.path.join(sa_path, filename)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
                     print(f"已下载并保存图片：{save_path}")
